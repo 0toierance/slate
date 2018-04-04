@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>Ark.io api guide</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -210,293 +210,386 @@
     </a>
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
         <ul class="search-results"></ul>
       <div id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
-          </li>
-          <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="introduction">Introduction</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#javascript" class="toc-h2 toc-link" data-title="javascript">Javascript</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#python" class="toc-h2 toc-link" data-title="python">Python</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#go" class="toc-h2 toc-link" data-title="go">Go</a>
+                  </li>
+                  <li>
+                    <a href="#net" class="toc-h2 toc-link" data-title="net">.NET</a>
+                  </li>
+                  <li>
+                    <a href="#java" class="toc-h2 toc-link" data-title="java">Java</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+            <a href="#arky" class="toc-h1 toc-link" data-title="arky">Arky</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#connecting-to-a-peer" class="toc-h2 toc-link" data-title="connecting-to-a-peer">Connecting to a peer</a>
+                  </li>
+                  <li>
+                    <a href="#querying" class="toc-h2 toc-link" data-title="querying">Querying</a>
+                  </li>
+                  <li>
+                    <a href="#creating-a-transaction" class="toc-h2 toc-link" data-title="creating-a-transaction">Creating a transaction</a>
+                  </li>
+                  <li>
+                    <a href="#generating-an-address" class="toc-h2 toc-link" data-title="generating-an-address">Generating an address</a>
+                  </li>
+              </ul>
           </li>
       </div>
-        <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Each ark <a href="https://github.com/ArkEcosystem/ark-node">relay node</a> 
+has a number of api endpoints opened up. Depending on the network, -mainnet,
+testnet or a bridgenet-, different ports listen to incoming requests.</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>These endpoints can be used to find blocks, transactions, delegates, or post
+transactions of different types. As creating transactions is relatively
+complicated, it is best to use an api wrapper such as Arky to handle 
+the creation of the transaction for you.</p>
+<h2 id='javascript'>Javascript</h2>
+<p>Ark-JS is a JavaScript library for sending ARK transactions. It does not wrap 
+the different api endpoints used for querying the blockchain. We recommend you use 
+ark-ts to leverage all the advantages of typescript.</p>
+<h2 id='python'>Python</h2>
+<p>Our verbose python api client of choice is Arky. It can handle all endpoints, generate transactions and
+has some lower level operations available through the crypto package. 
+Don&#39;t try to create transactions yourself using these unless you know what 
+you are doing. </p>
 
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<p>If you are looking for something more lightweight, check out pythark (a wrapper on top of Arky)
+or Python-Ark-Client, which uses the ark-js library for building transactions.</p>
+<h2 id='go'>Go</h2>
+<p>Ark-GO is the ARK Ecosystem library client implemented in GOLANG programming language. 
+It implements all most relevant ARK functionalities to help you develop efficient, 
+fast and scalable GOLANG applications built upon ARK platform. It provides also 
+low level access to ARK so you can easily build your application on top of it.</p>
+<h2 id='net'>.NET</h2>
+<p>Ark.NET is the ARK Ecosystem library for the .NET platform. It implements all most 
+relevant ARK functionalities to help you develop efficient .NET applications built 
+upon the ARK platform. 
+The package supports Windows Desktop applications, Mono Desktop applications, 
+and platform supported at .NET Standard Library. 
+Should work will all .NET solutions with framework &gt; 4.5.2.</p>
+<h2 id='java'>Java</h2>
+<p>There are two libraries you can use when building on the JVM, Ark-kotlin and ark-java.
+The first is written in Kotlin and fully interoperable with Java &amp; Android as well.</p>
+<h1 id='arky'>Arky</h1>
+<p>An ark api wrapper by Moustikitos for pythonistas.</p>
+<pre class="highlight plaintext"><code>sudo apt get python-dev3.X
+pip3 install arky
 </code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p>Arky 1.X.X is capable of connecting to the ledger nano s, and thus has some
+extra package requirements. To install these packages, you will need
+the development version of python.</p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
+<p>We recommend using python 3.6-dev. Then simply pip3 install arky.</p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+Even though python-dev ought to install all need C headers and dependencies, sometimes errors
+occur. Try the following if you get this error: command 'x86_64-linux-gnu-gcc failed with exit status 1`
+    
+    <ul>
+    <li>sudo apt-get install gcc</li>
+    <li>sudo apt install libudev-dev libusb-1.0-0-dev</li>
+    </ul>
+    
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+<h2 id='connecting-to-a-peer'>Connecting to a peer</h2><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">arky.rest</span>
+<span class="n">arky</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s">"ark"</span><span class="p">)</span> 
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>the contents of the ark.net file which are loaded when arky.rest.use is invoked.</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"begintime"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">2017</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">],</span><span class="w">
+  </span><span class="s2">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ark"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"familly"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ark"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maxlimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"maxvotepertx"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"compressed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"wif"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aa"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"marker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"slip44"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"bip32"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"private"</span><span class="p">:</span><span class="w"> </span><span class="mi">76066276</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"public"</span><span class="p">:</span><span class="w"> </span><span class="mi">76067358</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
+  </span><span class="s2">"headers"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"Content-Type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4001"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">4001</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"peers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"5.39.9.240"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"5.39.9.241"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"5.39.9.242"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"5.39.9.243"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"5.39.9.244"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"5.39.9.250"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"5.39.9.251"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"5.39.9.252"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"5.39.9.253"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"5.39.9.254"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"5.39.9.255"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"broadcast"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+  </span><span class="s2">"explorer"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://explorer.ark.io"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"token"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ark"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"symbol"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Ѧ"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"delegate"</span><span class="p">:</span><span class="w"> </span><span class="mi">51</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"blocktime"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"blockreward"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>After creating your own .net file, you can use it like you would use the mainnet or devnet.</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="n">arky</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s">"mytestnetwork"</span><span class="p">)</span>
+<span class="c"># You can also override the peers.</span>
+<span class="n">arky</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">PEERS</span><span class="o">=</span><span class="p">[</span><span class="s">'mypeer1'</span><span class="p">,</span> <span class="s">'mypeer2'</span><span class="p">]</span>
+</code></pre>
+<p>Arky performs an automatic peer selection for you based on the information
+provided by seed peers. </p>
+
+<p>This will work fine for mainnet (ark) and devnet (dark). However for a custom
+network you will have to add a .net file for Arky to use to initialize the client.
+.net files are stored in the directory where you installed Arky, inside the net directory.
+For example inside <code>python3/lib/site-packages/arky/net/ark.net</code></p>
+
+<p>If you have created a custom network, edit the marker, header.port, header, and peers. 
+Marker is the hexadecimal representation of the first letter of the addressing, the rest is optional. 
+You can now connect to your private network. After initialization you can override the peer by setting the <code>cfg.PEERS</code> to a new IP.</p>
+
+<p>Use this link to find the correct value for the marker value: 
+<a href="https://bitcoin.stackexchange.com/questions/36623/what-version-byte-will-produce-a-base58-encoding-starting-with-x">link</a></p>
+<h2 id='querying'>Querying</h2>
+<blockquote>
+<p>Querying is easy! Simply follow the same scheme as the rest endpoints. </p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="c"># the general querying scheme looks like this:</span>
+<span class="c"># arky.rest.[METHOD].[endpoints with "/" replaced by "."](param=value, ...[returnKey=name])</span>
+
+
+<span class="c"># http equivalent [PEER ADDRESS]/api/delegates/get?username=arky</span>
+<span class="n">arky</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">delegates</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s">"arky"</span><span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>Our response looks like this.</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">  
+   </span><span class="s2">"delegate"</span><span class="p">:{</span><span class="w">  
+      </span><span class="s2">"productivity"</span><span class="p">:</span><span class="mf">99.22</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="s2">"producedblocks"</span><span class="p">:</span><span class="mi">42283</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"approval"</span><span class="p">:</span><span class="mf">1.06</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"rate"</span><span class="p">:</span><span class="mi">19</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"publicKey"</span><span class="p">:</span><span class="s2">"030da05984d579395ce276c0dd6ca0a60140a3c3d964423a04e7abe110d60a15e9"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"username"</span><span class="p">:</span><span class="s2">"arky"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"vote"</span><span class="p">:</span><span class="s2">"137484978342696"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"address"</span><span class="p">:</span><span class="s2">"ARfDVWZ7Zwkox3ZXtMQQY1HYSANMB88vWE"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"missedblocks"</span><span class="p">:</span><span class="mi">334</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="s2">"success"</span><span class="p">:</span><span class="err">True</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>After initialization, Arky will have dynamically created some modules and classes. Don&#39;t
+worry if your IDE tells you that modules are missing.</p>
+<h2 id='creating-a-transaction'>Creating a transaction</h2>
+<blockquote>
+<p>Now comes the cool stuff. Creating transactions is easy with a wrapper.</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">arky.rest</span>
+<span class="n">arky</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s">"dark"</span><span class="p">)</span>
+
+<span class="n">USER_SECRET</span> <span class="o">=</span> <span class="s">"one two three four five six seven eight nine ten eleven twelve"</span>
+<span class="n">MASTER_SECRET</span> <span class="o">=</span> <span class="s">"matter mother draft wear joke media brain build month second such invite"</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="n">arky</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">crypto</span><span class="o">.</span><span class="n">getKeys</span><span class="p">(</span><span class="n">USER_SECRET</span><span class="p">)</span>
+<span class="n">PUB</span><span class="p">,</span> <span class="n">PRIV</span><span class="p">,</span> <span class="n">WIF</span> <span class="o">=</span> <span class="n">user</span><span class="p">[</span><span class="s">"publicKey"</span><span class="p">],</span> <span class="n">user</span><span class="p">[</span><span class="s">"privateKey"</span><span class="p">],</span> <span class="n">user</span><span class="p">[</span><span class="s">"wif"</span><span class="p">]</span>
+
+<span class="n">ADR</span> <span class="o">=</span> <span class="n">arky</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">crypto</span><span class="o">.</span><span class="n">getAddress</span><span class="p">(</span><span class="n">PUB</span><span class="p">)</span>
+
+<span class="n">transaction</span> <span class="o">=</span> <span class="n">arky</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">sendToken</span><span class="p">(</span><span class="n">amount</span><span class="o">=</span><span class="mi">1000000000</span><span class="p">,</span> <span class="n">recipientId</span><span class="o">=</span><span class="n">ADR</span><span class="p">,</span>
+      <span class="n">secret</span><span class="o">=</span><span class="n">MASTER_SECRET</span><span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>If you had added some print statements, you&#39;d see this.</p>
+</blockquote>
+<pre class="highlight plaintext"><code>PUB:     0309d164ec345776d7b902cbe27bf16a3d6fe234618d3963e906e66ee424f9982e
+PRIV:    aba2570815169d04bc0b454c3e107cbce15af228ca43707937637f25e738ab2b
+WIF:     cTLLSVesJSmrNjAr5h7CPmsxDpULWaPvV9vMXWqQ2k66BMGmx5ev
+ADR:     DNzRmkeUYp9LHbiHgn77iNRoabtHFAYRb9
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">  
+   </span><span class="s2">"success"</span><span class="p">:</span><span class="s2">"100.0%"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"transactions"</span><span class="p">:[</span><span class="w">  
+      </span><span class="s2">"224a270cc4ee1ced57168527487d3bb51ab43021f94ec2a3526e0f3b7974884f"</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="s2">"messages"</span><span class="p">:[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<aside class="warning">
+Never reveal your private key or secret to anyone. Ownership of coins or data on a 
+blockchain is solely determined by whomever has possesion of the private key.
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>Ark has constant transaction fees at the moment, however in V2 you will 
+be paying a fee per byte. </p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<p>Even though your wallet will display Ark/tokens in complete numbers, 
+actually a single token consists of 10⁸ satoshis. The standard network fee
+is 10⁷ arktoshi, or 0.1 token. The transaction fee is automatically added to
+the amount you wish to send, so sending 1 Ark over the api endpoint means 
+that the wallet will lose 1.1 Ark. The desktop client (graphical user interface) 
+conveniently displays how much Ark is actually removed, if you require a
+sanity check.</p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<p>Read more on address generation in the following section. </p>
+
+<p>Notice the success percentage. Arky will try to send the transaction to multiple nodes,
+this decreases the odds of a bad peer going down right after receiving a transaction.</p>
+
+<p>The master wallet is sending Devnet Ark (dark) to the user wallet. All we need is the user address
+and the master secret. We procedurally generate the address from the user secret by way of public key.</p>
+
+<p>Even if a transactionId is returned, the transaction is only permanently added if it is incorporated in the 
+blockchain. This should happen approximately 8 seconds after sending the transaction.</p>
+
+<p>Arky broadcasts the transaction to multiple peers. The success percentage relays the amount of 
+peers that successfully received the transaction.</p>
+
+<aside class="warning">
+Even though you can be reasonably sure a transaction will be added to the blockchain after receiving
+a success from the peers, it is only finalized if it is actually in a block. Read more on double 
+spend attacks <a href="https://en.bitcoin.it/wiki/Irreversible_Transactions">here</a>
+</aside>
+<h2 id='generating-an-address'>Generating an address</h2>
+<blockquote>
+<p>Addresses are procedurally generated. No need to register an account somewhere!</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">arky.rest</span>
+<span class="n">arky</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s">"dark"</span><span class="p">)</span>
+
+<span class="n">secret</span> <span class="o">=</span> <span class="s">"some random gibberish, not necessarily english words, but whatever you want."</span>
+
+<span class="n">keyRing</span> <span class="o">=</span> <span class="n">arky</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">crypto</span><span class="o">.</span><span class="n">getKeys</span><span class="p">(</span><span class="n">secret</span><span class="p">)</span>
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Our output:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="w">    </span><span class="p">{</span><span class="w">  
+   </span><span class="s2">"publicKey"</span><span class="p">:</span><span class="s2">"038fd0a57a752da3c7d57b65546e1a98d66d23af3978047b526febd108f873a19d"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"privateKey"</span><span class="p">:</span><span class="s2">"5f3ac9757a8beb807f19ddd51830191bc38d7e6d780fc37dc4ed43ebe9fab883"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"wif"</span><span class="p">:</span><span class="s2">"cQmpFxuRp66iggeRRXF295LQoZyeLZicNiNmQimuTnJhpGZgQFF3"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></code></pre><pre class="highlight python tab-python"><code><span class="n">address</span> <span class="o">=</span> <span class="n">arky</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">crypto</span><span class="o">.</span><span class="n">getAddress</span><span class="p">(</span><span class="n">keyRing</span><span class="p">[</span><span class="s">"publicKey"</span><span class="p">])</span>
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>A valid devnet address starts with a D.</p>
+</blockquote>
+<pre class="highlight plaintext"><code>DFbRTxKpkemtY7wd3RCoNDEpedGdETqx9g
+</code></pre>
+<blockquote>
+<p>Lets check the account info.</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="n">arky</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">accounts</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="n">address</span><span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>No luck, apparently the network doesn&#39;t have a copy of the details.</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Account not found"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Lets send the address some tokens and then query the details again.</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="n">res</span> <span class="o">=</span> <span class="n">arky</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">sendToken</span><span class="p">(</span><span class="n">amount</span><span class="o">=</span><span class="mi">1000000000</span><span class="p">,</span> <span class="n">recipientId</span><span class="o">=</span><span class="n">address</span><span class="p">,</span>
+      <span class="n">secret</span><span class="o">=</span><span class="s">"matter mother draft wear joke media brain build month second such invite"</span><span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>Success!</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DFbRTxKpkemtY7wd3RCoNDEpedGdETqx9g"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"unconfirmedBalance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"publicKey"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"unconfirmedSignature"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"secondSignature"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"secondPublicKey"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"multisignatures"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"> 
+            </span><span class="s2">"u_multisignatures"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
-<h1 id='errors'>Errors</h1>
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
+<blockquote>
+<p>No public key though. Why?</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">arky</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">sendToken</span><span class="p">(</span><span class="n">amount</span><span class="o">=</span><span class="mi">1000000000</span><span class="p">,</span> <span class="n">recipientId</span><span class="o">=</span><span class="n">address</span><span class="p">,</span>
+      <span class="n">secret</span><span class="o">=</span><span class="n">secret</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">arky</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">accounts</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="n">address</span><span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>That&#39;s better.</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DFbRTxKpkemtY7wd3RCoNDEpedGdETqx9g"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"unconfirmedBalance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"publicKey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"038fd0a57a752da3c7d57b65546e1a98d66d23af3978047b526febd108f873a19d"</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"unconfirmedSignature"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"secondSignature"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"secondPublicKey"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+            </span><span class="s2">"multisignatures"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"> 
+            </span><span class="s2">"u_multisignatures"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Addresses are procedurally generated from a secret. You do not need to register an account or address through
+the API. Actually any address of the correct format will be accepted as recipient in a transaction, meaning
+that it is possible to send tokens to an address of which the secret is unknown. Once an address has received 
+tokens, it will be queryable from the api.</p>
 
-<p>The Kittn API uses the following error codes:</p>
+<p>The keyRing is a dictionary containing the privateKey, publicKey and wif.
+from the publicKey we can then generate an address. This is a valid address to which we can send tokens. Were you to query the api for this address right now, you wouldn&#39;t
+receive its balance, as the network is not aware the address exists. Only once it has a balance does it show up.</p>
 
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request -- Your request sucks.</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
-</tr>
-</tbody></table>
+<p>If we send some tokens to the address and then query again, we get a succesful response. However the publickey is not 
+returned At the moment we are looking at a cold wallet. The network has never received the public key. It is not possible
+to derive a public key from the address. Only once an address has sent a transaction does it reveal its public key to
+the network.</p>
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
-          </div>
       </div>
     </div>
   </body>
